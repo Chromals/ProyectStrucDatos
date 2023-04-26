@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package Menu;
 
 import Modulo1.NodosP;
 import Modulo1.Producto;
 import Modulo2.Cliente;
 import Modulo2.ListaC;
+import Modulo3.Carrito;
+import Modulo4.*;
 import java.time.LocalDate;
 import javax.swing.Box;
 import javax.swing.JLabel;
@@ -31,8 +29,12 @@ public class MenuPrincipal {
     static Cliente clienteSeleccionado = new Cliente();
 
     //carrito
+    static Carrito carrito = new Carrito ();
     
     //facturacion
+    static ColaFacturacion fact= new ColaFacturacion ();
+    static Facturacion factura = new Facturacion ();
+    
     
     
     public static void main(String[] args) {
@@ -206,6 +208,85 @@ public class MenuPrincipal {
                 break;
             }
         }
+    }
+     private static void SubMenuCarrito() {
+
+        String[] opciones = {"1 - Consultar Carrito", "2 - Eliminar Producto", "3 - Finalizar Compra", "4 - Regresar"};
+        
+        int seleccionProd = JOptionPane.showOptionDialog(null, "Selecciona una opción:", "Menú principal", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
+        
+        
+        
+        switch (seleccionProd) {
+            case 0: {//consultar
+                
+                carrito.consultar();
+                SubMenuCarrito();
+                break;
+            }
+            case 1: // eliminar
+            {
+                String respuesta = JOptionPane.showInputDialog(null, "Digite el Codigo del Producto a Eliminar: ", "Busqueda De Producto ", JOptionPane.PLAIN_MESSAGE);
+                
+                carrito.eliminarProducto(Integer.parseInt(respuesta));
+                
+                SubMenuCarrito();
+                break;
+            }
+            case 2: //Finalizar Compra
+            {
+               Carrito c = carrito.finalizarCompra();
+               factura.setClient(c.getClient()); 
+               factura.setListadoProductos(c.getListaProductos());
+               //facturacion.agregarFactura(c);
+                SubMenuCarrito();
+                break;
+            }
+            default: {
+                menuPrincipal();
+                break;
+            }
+        }
+
+    }
+     private static void SubMenuFacturacion() {
+
+        String[] opciones = {"1 - Consultar Facturas ", "2 - Consultar Facturas Especificas", "3 - Proceder Con el Pago", "4 - Regresar"};
+        System.out.println("TEST");
+        int seleccionProd = JOptionPane.showOptionDialog(null, "Selecciona una opción:", "Menú principal", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
+        
+        
+        
+        switch (seleccionProd) {
+            case 0: {
+                
+                
+                
+                SubMenuFacturacion();
+                break;
+            }
+            case 1: 
+            {
+                
+                pruebaPila.recorridoPila();
+                SubMenuFacturacion();
+                break;
+            }
+            case 2: 
+            {
+                String respuesta = JOptionPane.showInputDialog(null, "Digite el Codigo del Producto a Seleccionar: ", "Busqueda De Cliente ", JOptionPane.PLAIN_MESSAGE);
+                productoSeleccionado = pruebaPila.pop(Integer.parseInt(respuesta));
+                if(productoSeleccionado == null )
+                {
+                    JOptionPane.showMessageDialog(null, "No se encontro ningun producto con el codigo: " + respuesta);
+                }
+            }
+            default: {
+                menuPrincipal();
+                break;
+            }
+        }
+
     }
 
 }
