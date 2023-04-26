@@ -4,13 +4,18 @@
  */
 package Modulo4;
 
-/**
- *
- * @author marflord
- */
 public class NodoF {
     private Facturacion factura; // Facturacion que contiene el NodoF
     private NodoF siguiente; // El NodoF siguiente en la lista
+     private NodoF anterior ; // El NodoF siguiente en la lista
+
+    public NodoF getAnterior() {
+        return anterior;
+    }
+
+    public void setAnterior(NodoF anterior) {
+        this.anterior = anterior;
+    }
     
     /**
      * Constructor de la clase NodoF.
@@ -35,7 +40,12 @@ public class NodoF {
      */
     public NodoF getSiguiente() {
         return siguiente;
+        
+        
+    
     }
+    
+    
     
     /**
      * Establece el NodoF siguiente en la lista.
@@ -44,4 +54,25 @@ public class NodoF {
     public void setSiguiente(NodoF siguiente) {
         this.siguiente = siguiente;
     }
+    @Override //string con la informacion de la lista
+    public String toString() {
+        String s = " Reporte de Facturas: \n";
+        System.out.println(this.siguiente);
+        NodoF aux = this.siguiente;
+
+        if (aux != null) {
+            s += aux + ", \n";
+            aux = aux.getSiguiente();
+            while (aux != this.siguiente) {
+                s += aux + ", \n";
+                aux = aux.getSiguiente();
+            }
+
+        } else {
+            s += "vacia";
+        }
+
+        return s;
+    }
+
 }

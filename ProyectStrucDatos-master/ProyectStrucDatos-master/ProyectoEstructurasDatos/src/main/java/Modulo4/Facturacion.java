@@ -4,6 +4,8 @@
  */
 package Modulo4;
 
+import Modulo1.NodosP;
+import Modulo1.Producto;
 import java.util.List;
 
 /**
@@ -12,18 +14,18 @@ import java.util.List;
  */
 public class Facturacion {
    // Variables miembro que almacenan los detalles de la factura
-private int codigo;                 // código de la factura
+private int codigo=0;                 // código de la factura
 private String encabezado;          // encabezado de la factura
 private String fecha;               // fecha de la factura
-private List<String> listadoProductos;  // lista de productos de la factura
+private List<NodosP> listadoProductos;  // lista de productos de la factura en vez de lis strings ean un list nodosP
 private double monto;               // monto de la factura
 private double iva;                 // impuesto del valor añadido (IVA) de la factura
 private double montoTotal;          // monto total de la factura
 private String medioPago;           // medio de pago utilizado
 
 // Constructor de la clase Facturacion que inicializa todos los detalles de la factura
-public Facturacion(int codigo, String encabezado, String fecha, List<String> listadoProductos, double monto, double iva1, double montoTotal1, String medioPago) {
-    this.codigo = codigo;
+public Facturacion(String encabezado, String fecha, List<NodosP> listadoProductos, double monto, double iva1, double montoTotal1, String medioPago) {
+    this.codigo = codigo+1;
     this.encabezado = encabezado;
     this.fecha = fecha;
     this.listadoProductos = listadoProductos;
@@ -33,9 +35,14 @@ public Facturacion(int codigo, String encabezado, String fecha, List<String> lis
     this.medioPago = medioPago;
 }
 
+    public Facturacion() {
+       
+    }
+
 // Métodos para obtener los detalles de la factura
 public int getCodigo() {
     return codigo;
+
 }
 
 public String getEncabezado() {
@@ -46,7 +53,7 @@ public String getFecha() {
     return fecha;
 }
 
-public List<String> getListadoProductos() {
+public List<NodosP> getListadoProductos() {
     return listadoProductos;
 }
 
@@ -65,6 +72,38 @@ public double getMontoTotal() {
 public String getMedioPago() {
     return medioPago;
 }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setEncabezado(String encabezado) {
+        this.encabezado = encabezado;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setListadoProductos(List<NodosP> listadoProductos) {
+        this.listadoProductos = listadoProductos;
+    }
+
+    public void setMonto(double monto) {
+        this.monto = monto;
+    }
+
+    public void setIva(double iva) {
+        this.iva = iva;
+    }
+
+    public void setMontoTotal(double montoTotal) {
+        this.montoTotal = montoTotal;
+    }
+
+    public void setMedioPago(String medioPago) {
+        this.medioPago = medioPago;
+    }
     
 }
 
